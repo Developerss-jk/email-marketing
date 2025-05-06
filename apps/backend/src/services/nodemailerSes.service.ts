@@ -1,9 +1,8 @@
 import nodemailer from 'nodemailer';
-import { SESClient } from '@aws-sdk/client-ses';
-import { SendRawEmailCommand } from '@aws-sdk/client-ses';
+import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2';
 
-const ses = new SESClient({ region: process.env.AWS_REGION || 'us-east-1' });
+const sesClient = new SESv2Client({ region: process.env.AWS_REGION });
 
 export const transporter = nodemailer.createTransport({
-  SES: { ses, aws: { SendRawEmailCommand } },
+  SES: { sesClient, SendEmailCommand },
 });

@@ -12,7 +12,7 @@ export const scheduleEmail = async (req: Request, res: Response) => {
 
   try {
     await agenda.schedule(delay, 'send-email', { to, subject, body });
-    res.status(200).json({ message: `📧 Email scheduled in ${delay}` });
+    res.status(200).json({ message: `Email scheduled in ${delay}` });
   } catch (err) {
     console.error('Failed to schedule email:', err);
     res.status(500).json({ message: 'Failed to schedule email.' });

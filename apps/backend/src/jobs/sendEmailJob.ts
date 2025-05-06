@@ -7,11 +7,19 @@ export default (agenda: Agenda) => {
     const from = process.env.SES_SENDER_EMAIL;
 
     try {
+      transporter.verify((err, success) => {
+        if (err) {
+          console.error('Transporter verification failed:', err);
+        } else {
+          console.log('SES transporter is ready to send messages', success);
+        }
+      });
+
       await transporter.sendMail({
         from,
         to,
         subject,
-        text: body,
+        html: body,
       });
 
       console.log(`Email sent to ${to}`);

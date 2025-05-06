@@ -15,7 +15,6 @@ const agenda = new Agenda({
 agenda.on('ready', async () => {
   sendEmailJob(agenda);
   await agenda.start();
-  console.log('Agenda started');
 });
 
 export { agenda };

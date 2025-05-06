@@ -15,8 +15,3 @@ const port = process.env.PORT ?? 3001;
     console.error('Failed to start Agenda or server:', error);
   }
 })();
-
-// const defineEmailJob = require('./jobs/emailJob');
-
-// // Define Jobs
-// defineEmailJob(agenda);
