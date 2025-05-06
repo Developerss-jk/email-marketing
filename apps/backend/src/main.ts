@@ -1,14 +1,22 @@
-import express from 'express';
+import dotenv from 'dotenv';
+import app from './app';
+import { agenda } from './services';
+
+dotenv.config();
 
 const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+const port = process.env.PORT ?? 3001;
 
-const app = express();
+(async () => {
+  try {
+    await agenda.start();
+    app.listen(port, () => console.log(`[ ready ] http://${host}:${port}`));
+  } catch (error) {
+    console.error('Failed to start Agenda or server:', error);
+  }
+})();
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
-});
+// const defineEmailJob = require('./jobs/emailJob');
 
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
-});
+// // Define Jobs
+// defineEmailJob(agenda);
